@@ -1,61 +1,78 @@
-<?php include ("conexion.php") ?>
+<?php include("conn.php") ?>
 
-<?php include ("include/header.php") ?>
+<?php include("include/header.php") ?>
 
-    <div class="container p-4">
-        <div class="row">
-            <div class="col-md-4">
+<?php include("include/navbar.php") ?>
 
-                <?php if(isset($_SESSION['message'])) {?>
-                    <div class="alert alert-<?= $_SESSION['message_type']  ?> alert-dismissible fade show" role="alert">
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4">
+
+            <?php if (isset($_SESSION['message'])) { ?>
+                <div class="alert alert-<?= $_SESSION['message_type']  ?> alert-dismissible fade show" role="alert">
                     <?= $_SESSION['message']  ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php session_unset(); }?>
-
-                <div class="card card-body">
-
-                    <form action="save_task.php" method= "POST">
-                        <div class="form-group">
-                            <input type="text " name= "title" class = "form-control" placeholder= "Task Title" autofocus>
-                        </div>
-
-                        <div class="form-group">
-                            <textarea name="desciption" rows="5" class= "form-control" placeholder= "Task Description"></textarea>
-                        </div>
-                        
-                        <input type="submit" class= "btn btn-success btn-block" name="save_task" value= "Save Task">
-                    </form>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <table class = "table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $query = "SELECT * FROM task";
-                        $result_tasks = mysqli_query($con,$query);  
+            <?php session_unset();
+            } ?>
 
-                        while($row = mysqli_fetch_array($result_tasks)){ ?>
-                            <tr>
-                                <td><?php echo $row['tsk_title'] ?></td>
-                                <td><?php echo $row['tsk_description'] ?></td>
-                                <td><?php echo $row['tsk_created'] ?></td>
-                            </tr>
+            <div class="card card-body">
+                <h2>Registrar</h2>
 
-                        <?php } ?>
-                        
+                <form action="save.php" method="POST">
+                    <div class="form-group">
+                        <input type="text " name="nombre" class="form-control" placeholder="Nombre..." autofocus required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" name="apellido" rows="5" class="form-control" placeholder="Apellido..." required>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" name="sexo" rows="5" class="form-control" placeholder="Sexo..." required>
+                    </div>
+                    <br>
 
-                    </tbody>
-                </table>
+                    <input type="submit" class="btn btn-success btn-block" name="save" value="Enviar">
+                </form>
             </div>
         </div>
-    </div>
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Sexo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = "SELECT * FROM task";
+                    $result_tasks = mysqli_query($conn, $query);
 
-<?php include ("include/footer.php") ?>
+                    while ($row = mysqli_fetch_assoc($result_tasks)) { ?>
+                        <tr>
+                            <td><?php echo $row['alu_id']; ?></td>
+                            <td><?php echo $row['alu_nombre']; ?></td>
+                            <td><?php echo $row['alu_apellido']; ?></td>
+                            <td><?php echo $row['alu_sexo']; ?></td>
+                            <td>
+                                <a href="edit.php?id=<?php echo $row['alu_id'] ?>" class="btn btn-secondary">
+                                    <img src="./svg/edit-2.svg" alt="">
+                                </a>
+                                <a href="delete.php?id=<?php echo $row['alu_id'] ?>" class="btn btn-danger">
+                                    <img src="./svg/trash-2.svg" alt="">
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<?php include("include/footer.php") ?>
