@@ -6,7 +6,7 @@ if (isset($_POST['save'])) {
    $apellido = $_POST['apellido'];
    $sexo = $_POST['sexo'];
 
-   $query = "INSERT INTO task (alu_nombre, alu_apellido, alu_sexo ) VALUES ('$nombre','$apellido', '$sexo')";
+   $query = "INSERT INTO alumnos (alu_nombre, alu_apellido, alu_sexo ) VALUES ('$nombre','$apellido', '$sexo')";
 
    $res = mysqli_query($conn, $query);
 
@@ -14,8 +14,8 @@ if (isset($_POST['save'])) {
       die("Query failed");
    }
 
-   $_SESSION['message'] = "Task saved successfully";
+   $_SESSION['message'] = "Guardado correctamente";
    $_SESSION['message_type'] = 'success';
 
-   header("Location:index.php");
+   header("Location:../pages/index.php");
 }
