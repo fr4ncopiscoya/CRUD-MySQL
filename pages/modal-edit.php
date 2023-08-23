@@ -1,4 +1,4 @@
-<!--ventana para Update--->
+<!--Inicio ventana para Update--->
 <div class="modal fade" id="edit<?php echo $row['alu_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -41,4 +41,4 @@
         </div>
     </div>
 </div>
-<!---fin ventana Update --->
+<!---Fin ventana Update --->

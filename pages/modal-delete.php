@@ -1,4 +1,4 @@
-<!-- Ventana modal para eliminar -->
+<!-- Inicio ventana modal para eliminar -->
 <div class="modal fade" id="delete<?php echo $row['alu_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
